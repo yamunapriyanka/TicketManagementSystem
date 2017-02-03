@@ -36,7 +36,7 @@ public void delete(final int id) {
 	System.out.println(rows);
 
 }
-public List<Employee> list() {
+public List<Employee> listEmployee() {
 	final String sql = "select ID,DEPARTMENT_ID,NAME,EMAIL_ID,PASSWORD,ISACTIVE from EMPLOYEE";
 	return jdbcTemplate.query(sql, (rs, rowNum) -> {
 		final Employee employee = convert(rs);
@@ -60,5 +60,6 @@ Employee convert(final ResultSet rs) throws SQLException {
 		return employee;
 		
 }
+
 
 }
