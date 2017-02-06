@@ -12,7 +12,7 @@ public class TestDepartmentDAO {
 		DepartmentDAO departmentDAO=new DepartmentDAO();
 
 		//departmentDAO.delete(4);
-		final List<Department> list = departmentDAO.listdepartment();
+		final List<Department> list = departmentDAO.listdept();
 		final Iterator<Department> ii = list.iterator();
 
 while (ii.hasNext()) {

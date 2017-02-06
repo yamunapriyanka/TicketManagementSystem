@@ -18,7 +18,7 @@ JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
 public void save(Department department) throws Persistant {
 	try {
 		String sql = "INSERT INTO DEPARTMENT(NAME)VALUES(?)";
-		Object[] params = { department.getDepartment() };
+		Object[] params = { department.getName() };
 		jdbcTemplate.update(sql, params);
 	} catch (DuplicateKeyException e) {
 		throw new Persistant("Given department already exists", e);
@@ -29,7 +29,7 @@ public void save(Department department) throws Persistant {
 	public void update(Department department) {
 
 		String sql = "UPDATE DEPARTMENT SET DEPARTMENT=? WHERE ID=?";
-		Object[] params = {department.getDepartment(),department.getId()};
+		Object[] params = {department.getName(),department.getId()};
 		int rows = jdbcTemplate.update(sql, params);
 		System.out.println("No of rows updated: " + rows);
 
@@ -47,8 +47,8 @@ public void save(Department department) throws Persistant {
 	public Department convert(final ResultSet rs) throws SQLException {
 		final Department department = new Department();
 department.setId(rs.getInt("ID"));
-department.setDepartment(rs.getString("NAME"));
-department.setActive(rs.getBoolean("ISACTIVE"));
+department.setName(rs.getString("NAME"));
+department.setIsactive(rs.getBoolean("ISACTIVE"));
 return department;
 	}
 	

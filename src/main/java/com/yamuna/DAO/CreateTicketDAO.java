@@ -39,7 +39,7 @@ public class CreateTicketDAO {
 		
 		Department departments=new Department();
 		DepartmentDAO departmentdao=new DepartmentDAO();
-		int departmentId=departmentdao.findUserId(department).getId();
+		int departmentId=departmentdao.findId(department).getId();
 		departments.setId(departmentId);
 		Issue.setDEPARTMENT_ID(departments);
 		Issue.setPRIORITY(priority);
