@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.yamuna.exception.Persistant;
+import com.yamuna.exception.PersistantException;
 import com.yamuna.model.Department;
 import com.yamuna.util.ConnectionUtil;
 
@@ -15,13 +15,13 @@ public class DepartmentDAO {
 
 JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
 	
-public void save(Department department) throws Persistant {
+public void save(Department department) throws PersistantException {
 	try {
 		String sql = "INSERT INTO DEPARTMENT(NAME)VALUES(?)";
 		Object[] params = { department.getName() };
 		jdbcTemplate.update(sql, params);
 	} catch (DuplicateKeyException e) {
-		throw new Persistant("Given department already exists", e);
+		throw new PersistantException("Given department already exists", e);
 	}
 
 }

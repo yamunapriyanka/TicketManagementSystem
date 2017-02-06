@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.yamuna.exception.Persistant;
+import com.yamuna.exception.PersistantException;
 import com.yamuna.model.UserInfo;
 import com.yamuna.util.ConnectionUtil;
 
@@ -53,7 +53,7 @@ public List<UserInfo> list() {
 
 		
 }
- public UserInfo findOne(String emailId,String password) throws Persistant{
+ public UserInfo findOne(String emailId,String password) throws PersistantException{
 	   try{
 		String sql = "SELECT PASSWORD FROM USER_INFO WHERE EMAIL_ID = ?";
 		Object[] params = { emailId,password};
@@ -65,7 +65,7 @@ public List<UserInfo> list() {
 		} );
 	   }
 	   catch(EmptyResultDataAccessException e){
-			throw new Persistant("Wrong Email id or Password",e);
+			throw new PersistantException("Wrong Email id or Password",e);
 		}
 		}
  public UserInfo findUserId(String emailId) {

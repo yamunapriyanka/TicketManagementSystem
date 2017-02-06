@@ -3,7 +3,7 @@ package com.yamuna.DAO;
 import java.util.Iterator;
 import java.util.List;
 
-import com.yamuna.exception.Persistant;
+import com.yamuna.exception.PersistantException;
 import com.yamuna.model.Department;
 import com.yamuna.model.Issue;
 import com.yamuna.model.UserInfo;
@@ -12,7 +12,7 @@ public class CreateTicketDAO {
 	Issue Issue=new Issue();
 	IssueDAO IssueDAO=new IssueDAO();
 	
-	public void registration(String name,String emailId,String password) throws Persistant{
+	public void registration(String name,String emailId,String password) throws PersistantException{
 		UserInfo userinfo=new UserInfo();
 		UserInfoDAO userDao=new UserInfoDAO();
 		
@@ -22,7 +22,7 @@ public class CreateTicketDAO {
 		
 		userDao.save(userinfo);
 	}
-	public void createTicket(String emailId,String password,String subject,String description,String department,String priority) throws Persistant{
+	public void createTicket(String emailId,String password,String subject,String description,String department,String priority) throws PersistantException{
 
 	LoginDAO loginDao=new LoginDAO();
 	if(loginDao.login(emailId, password)){
@@ -51,7 +51,7 @@ public class CreateTicketDAO {
 	}
 }
 	
-	public void updateTicket(String emailId,String password,int issueId,String updateDescription) throws Persistant{
+	public void updateTicket(String emailId,String password,int issueId,String updateDescription) throws PersistantException{
 		
 		LoginDAO loginDao=new LoginDAO();
 		if(loginDao.login(emailId, password)){
@@ -84,7 +84,7 @@ public class CreateTicketDAO {
 		}
 }
 	
-	public void updateClose(String emailId,String password,int issueId) throws Persistant{
+	public void updateClose(String emailId,String password,int issueId) throws PersistantException{
 		
 		LoginDAO loginDao=new LoginDAO();
 		if(loginDao.login(emailId, password)){
@@ -105,7 +105,7 @@ public class CreateTicketDAO {
 		}
 	}
 	
-	public void findUserDetails(String emailId,String password) throws Persistant{
+	public void findUserDetails(String emailId,String password) throws PersistantException{
 		LoginDAO loginDao=new LoginDAO();
 		if(loginDao.login(emailId, password)){
 			

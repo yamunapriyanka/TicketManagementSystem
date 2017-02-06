@@ -1,13 +1,16 @@
 package com.yamuna.exception;
 
-public class Persistant extends Exception{
+public class ValidatorException extends Exception{
+	
+	
 
-	public Persistant(String message, Throwable cause) {
+
+	public ValidatorException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Persistant(String message) {
+	public ValidatorException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
