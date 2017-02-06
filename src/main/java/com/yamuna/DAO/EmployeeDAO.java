@@ -4,8 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.yamuna.exception.PersistantException;
 import com.yamuna.model.Department;
 import com.yamuna.model.Employee;
 
@@ -42,8 +44,33 @@ public List<Employee> listEmployee() {
 		final Employee employee = convert(rs);
 		return employee;
 
-	});
+	});}
+
+	public Employee findOne(int id) {
+		String sql = "SELECT ID,DEPARTMENT_ID,ROLE_ID,NAME,EMAIL,ACTIVE FROM EMPLOYEES WHERE ID = ?";
+		Object[] params = { id };
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> convert(rs));
+
+	}
+	
+	public Employee findOne(String emailId,String password) throws PersistantException {
+	
+	try{
+		String sql = "SELECT ID FROM EMPLOYEES WHERE EMAIL_ID = ? AND PASSWORD=? AND ACTIVE=1";
+		Object[] params = { emailId,password };
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) ->{
+			Employee employee=new Employee();
+			employee.setId(rs.getInt("ID"));
+			return employee;
+		
+		});
+		
+	}
+	catch(EmptyResultDataAccessException e){
+		throw new PersistantException("Wrong Email id or Password",e);
+	}
 }
+
 Employee convert(final ResultSet rs) throws SQLException {
 		final Employee employee = new Employee();
 		employee.setId(rs.getInt("ID"));

@@ -1,17 +1,25 @@
 package com.yamuna.DAO;
 
 import com.yamuna.exception.PersistantException;
-import com.yamuna.model.UserInfo;
 
 public class LoginDAO {
 
-	UserInfo userInfo=new UserInfo();
-	UserInfoDAO userInfoDAO=new UserInfoDAO();
-	public boolean login(String emailId,String password) throws PersistantException{
-		String s=userInfoDAO.findOne(emailId,password).getPassword();
-		if(s.equals(password))
-			return true;
-		return false;
+	UserInfoDAO userDao=new UserInfoDAO();
+	EmployeeDAO employeeDao=new EmployeeDAO();
+	public boolean login(String emailId,String password) throws PersistantException  {
+		
+			userDao.findOne(emailId,password).getId();
+							return true;
+
 	}
 	
+	
+	public boolean employeeLogin(String emailId,String password) throws PersistantException  {
+		
+		employeeDao.findOne(emailId,password).getId();
+						return true;
+	
+	
+}
+
 }
