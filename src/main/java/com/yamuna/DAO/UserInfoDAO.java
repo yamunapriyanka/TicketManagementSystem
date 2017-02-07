@@ -46,8 +46,8 @@ public List<UserInfo> list() {
 }
  
 		
-		public UserInfo findOne(int id) {
-			String sql = "SELECT ID, NAME,EMAIL_ID,ACTIVE FROM USERS WHERE ID = ?";
+		public UserInfo findOne1(int id) {
+			String sql = "SELECT ID, NAME,EMAIL_ID,PASSWORD,ISACTIVE FROM USER_INFO WHERE ID = ?";
 			Object[] params = { id };
 			return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> convert(rs));
 
@@ -55,7 +55,7 @@ public List<UserInfo> list() {
 }
  public UserInfo findOne(String emailId,String password) throws PersistantException{
 	   try{
-		String sql = "SELECT PASSWORD FROM USER_INFO WHERE EMAIL_ID = ?";
+		String sql = "SELECT ID FROM USER_INFO WHERE EMAIL_ID = ? AND PASSWORD=?";
 		Object[] params = { emailId,password};
 		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
 			UserInfo userinfo=new UserInfo();
@@ -69,7 +69,7 @@ public List<UserInfo> list() {
 		}
 		}
  public UserInfo findUserId(String emailId) {
-		String sql = "SELECT ID FROM USERS WHERE EMAIL_ID = ?";
+		String sql = "SELECT ID FROM USER_INFO WHERE EMAIL_ID = ?";
 		Object[] params = { emailId };
 		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
 			UserInfo userinfo=new UserInfo();

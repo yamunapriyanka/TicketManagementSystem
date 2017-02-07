@@ -1,12 +1,7 @@
 package com.yamuna.DAO;
-import java.util.Iterator;
-import java.util.List;
-
 import com.yamuna.exception.PersistantException;
 import com.yamuna.exception.ServiceException;
-import com.yamuna.model.Employee;
 import com.yamuna.model.Issue;
-import com.yamuna.model.Solution;
 import com.yamuna.model.UserInfo;
 
 public class TestCreateTicketDAO {
@@ -15,33 +10,33 @@ public class TestCreateTicketDAO {
 
 		CreateTicketDAO createTicket=new CreateTicketDAO();
 		UserInfo userinfo=new UserInfo();
-		userinfo.setId(3);
-		int userId=userinfo.getId();
-		userinfo.setEmailid("rasik@gmail.com");
-		userinfo.setPassword("abc123");
+		//userinfo.setId(3);
+	//	Int userId=userinfo.getId();
+		userinfo.setEmailid("yamuna@gmail.com");
+		userinfo.setPassword("yamuna123");
 		
 		Issue issue=new Issue();
 		issue.setId(12);
-		int issueId=issue.getId();
+    	int issueId=issue.getId();
 		
-		String subject="Finance Failure";
-		String description="I could not find my money in bank";
-		String department="Finance";
-		String priority="High";
-		//createTicket.createTicket(user.getEmailId(),user.getPassword(), subject, description, department, priority);
-		//createTicket.updateTicket(user.getEmailId(),user.getPassword(), issueId, description);
+//		String subject="LOGIN FAULT";
+		String description="DISPLAY NOT WORKING";
+//		String department="Finance";
+//		String priority="High";
+	//createTicket.createTicket(userinfo.getEmailid(),userinfo.getPassword(), subject, description, department, priority);
+		createTicket.updateTicket(userinfo.getEmailid(),userinfo.getPassword(), issueId, description);
 		//createTicket.updateClose(user.getEmailId(),user.getPassword(),issueId);
 	//createTicket.findUserDetails(user.getEmailId(),user.getPassword());
 		
-		Employee employee=new Employee();
-		employee.setId(2);
-		employee.setEmailId("xyz@gmail.com");
-		employee.setPassword("abc321");
-		Solution solution=new Solution();
+//		Employee employee=new Employee();
+//		employee.setId(2);
+//		employee.setEmailId("mumtaj@gmail.com");
+//		employee.setPassword("mumtaj123");
+		//Solution solution=new Solution();
 		
-		solution.setSolutionDescription("Check you internet connection");
-	}}
-		//createTicket.assignEmployee(employee.getEmailId(), employee.getPassword(), issueId, employee.getId());
+		//solution.setSolutionDescription("Check you internet connection");
+	
+		//createTicket.assignEmployee(employee.getEmailId(), employee.getPassword(), issueId,);
 		//createTicket.ticketSolution(employee.getEmailId(), employee.getPassword(), issueId, solution.getResolutionDescription());
 		//createTicket.findEmployeeTickets(employee.getEmailId(), employee.getPassword());
 		//createTicket.deleteTickets(employee.getEmailId(), employee.getPassword(), issueId);
@@ -63,4 +58,5 @@ public class TestCreateTicketDAO {
 			Solution sol = (Solution) i.next();
 			System.out.println(list);
 		}*/
-	
+	}
+	}	

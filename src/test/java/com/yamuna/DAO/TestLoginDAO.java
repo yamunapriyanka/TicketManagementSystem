@@ -6,7 +6,7 @@ public class TestLoginDAO {
 
 	public static void main(String[] args) throws PersistantException {
 LoginDAO loginDAO=new LoginDAO();
-System.out.println(loginDAO.login("rashika@gmail.com","rashika12"));
+System.out.println(loginDAO.login("yamuna@gmail.com","yamuna123"));
 	}
 
 }

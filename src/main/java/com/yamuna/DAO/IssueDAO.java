@@ -28,7 +28,7 @@ public void save(final Issue issue) {
 	System.out.println(rows);
 }
 public void updateDescription(Issue Issue) {
-	String sql = "UPDATE ISSUES SET DESCRIPTION=?,STATUS='OPEN' WHERE ID=? AND USER_ID=?";
+	String sql = "UPDATE ISSUE SET DESCRIPTION=?,STATUS='OPEN' WHERE ID=? AND USER_ID=?";
 	Object[] params = {Issue.getDESCRIPTION(),Issue.getId(),Issue.getUSER_ID().getId()};
 	int rows = jdbcTemplate.update(sql, params);
 	System.out.println(rows);
@@ -36,7 +36,7 @@ public void updateDescription(Issue Issue) {
 }
 
 public void updateClose(Issue Issue) {
-	String sql = "UPDATE ISSUES SET STATUS='CLOSED' WHERE ID=? AND USER_ID=?";
+	String sql = "UPDATE ISSUE SET STATUS='CLOSED' WHERE ID=? AND USER_ID=?";
 	Object[] params = {Issue.getId(),Issue.getUSER_ID().getId()};
 	int rows = jdbcTemplate.update(sql, params);
 	System.out.println(rows);
@@ -49,7 +49,7 @@ public void delete(final int id) {
 	System.out.println(rows);
 }
 public List<Issue> findAll() {
-	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM TICKET_ISSUES";
+	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM ISSUE";
 	return jdbcTemplate.query(sql, (rs, rowNo) -> {
 	
 	final Issue ticketIssue = convert(rs);
@@ -60,21 +60,21 @@ public List<Issue> findAll() {
 }
 
 public  List<Issue> findUserDetails(int userId) {
-	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM TICKET_ISSUES WHERE USER_ID=?";
+	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM ISSUE WHERE USER_ID=?";
 	Object[] params = { userId };
 	return jdbcTemplate.query(sql,params, (rs, rowNo) -> convert(rs));
 
 }
 
 public Issue findOne(int id) {
-	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM TICKET_ISSUES WHERE ID = ?";
+	String sql = "SELECT ID,USER_ID,DEPARTMENT_ID,SUBJECT,DESCRIPTION,CREATED_DATE,RESOLVED_DATE,STATUS,PRIORITY FROM ISSUE WHERE ID = ?";
 	Object[] params = { id };
 	return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> convert(rs));
 
 }
 
 public Issue getStatus(int id) {
-	String sql = "SELECT STATUS FROM TICKET_ISSUES WHERE ID=?";
+	String sql = "SELECT STATUS FROM ISSUE WHERE ID=?";
 	Object[] params = { id };
 	return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
 		Issue Issue = new Issue();
@@ -119,7 +119,7 @@ Issue convert(final ResultSet rs) throws SQLException {
 }
 
 public List<Issue> findUserDetail(int userId) {
-	String sql = "SELECT ID,USER_ID,SUBJECT,DESCRIPTION,CREATED_DATE,STATUS,PRIORITY FROM TICKET_ISSUES WHERE USER_ID=?";
+	String sql = "SELECT ID,USER_ID,SUBJECT,DESCRIPTION,CREATED_DATE,STATUS,PRIORITY FROM ISSUE WHERE USER_ID=?";
 	Object[] params = { userId };
 	return jdbcTemplate.query(sql,params, (rs, rowNo) ->{
 		Issue ticketIssue=new Issue();
