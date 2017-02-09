@@ -89,7 +89,7 @@ public Issue findStatus(int userId,int id) {
 	Object[] params = { userId,id };
 	return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
 		Issue issue=new Issue();
-		issue.setSTATUS(rs.getString("Status"));
+		issue.setSTATUS(rs.getString("STATUS"));
 		return issue;
 	
 	});
@@ -118,26 +118,68 @@ Issue convert(final ResultSet rs) throws SQLException {
 		
 }
 
-public List<Issue> findUserDetail(int userId) {
-	String sql = "SELECT ID,USER_ID,SUBJECT,DESCRIPTION,CREATED_DATE,STATUS,PRIORITY FROM ISSUE WHERE USER_ID=?";
-	Object[] params = { userId };
-	return jdbcTemplate.query(sql,params, (rs, rowNo) ->{
-		Issue ticketIssue=new Issue();
-		ticketIssue.setId(rs.getInt("ID"));
-		
-		UserInfo userinformation=new UserInfo();
-		userinformation.setId(rs.getInt("USER_ID"));
-		ticketIssue.setUSER_ID(userinformation);
-		
-		ticketIssue.setSUBJECT(rs.getString("SUBJECT"));
-		ticketIssue.setDESCRIPTION(rs.getString("DESCRIPTION"));
-		ticketIssue.setSTATUS(rs.getString("STATUS"));
-		ticketIssue.setPRIORITY(rs.getString("PRIORITY"));
-		return ticketIssue;
+
+public void updateStatus(com.yamuna.model.Issue issue) {
+	String sql = "UPDATE ISSUE SET STATUS='In Progress' WHERE ID=?";
+	Object[] params = { issue.getId() };
+	int rows = jdbcTemplate.update(sql, params);
+	System.out.println(rows);
 	
+}
+public List<Issue> findUserDetails(Issue issues) {
+	String sql = "SELECT ID,USER_ID,SUBJECT,DESCRIPTION,STATUS,PRIORITY FROM ISSUES WHERE USER_ID=?";
+	Object[] params = { issues.getUSER_ID().getId() };
+	return jdbcTemplate.query(sql, params, (rs, rowNo) -> {
+		Issue issue = new Issue();
+		issue.setId(rs.getInt("ID"));
+
+		UserInfo user = new UserInfo();
+		user.setId(rs.getInt("USER_ID"));
+		issue.setUSER_ID(user);
+
+		issue.setSUBJECT(rs.getString("SUBJECT"));
+		issue.setDESCRIPTION(rs.getString("DESCRIPTION"));
+		issue.setSTATUS(rs.getString("STATUS"));
+		issue.setPRIORITY(rs.getString("PRIORITY"));
+		return issue;
+
 	});
 
 }
 
+public List<Issue> findempTickets(int empId) {
+	String sql = "SELECT ISSUES.ID,SUBJECT,DESCRIPTION,STATUS,PRIORITY FROM ISSUES , SOLUTIONS WHERE ISSUES.ID=SOLUTIONS.ISSUE_ID AND  SOLUTIONS.EMPLOYEE_ID=?";
+	Object[] params = { empId };
+	return jdbcTemplate.query(sql, params, (rs, rowNo) -> {
+		Issue issue = new Issue();
+
+		issue.setId(rs.getInt("ID"));
+		issue.setSUBJECT(rs.getString("SUBJECT"));
+		issue.setDESCRIPTION(rs.getString("DESCRIPTION"));
+		issue.setSTATUS(rs.getString("STATUS"));
+		issue.setPRIORITY(rs.getString("PRIORITY"));
+
+		return issue;
+
+	});
 
 }
+public void updateSolutionStatus(Issue issue) {
+	// TODO Auto-generated method stubpublic void updateSolutionStatus(Issue issue) {
+	String sql = "UPDATE ISSUES SET STATUS='Resolved',DATE_RESOLVED=NOW() WHERE ID=?";
+	Object[] params = { issue.getId() };
+	int rows = jdbcTemplate.update(sql, params);
+	System.out.println(rows);
+
+}
+
+	
+}
+
+
+
+
+
+
+
+

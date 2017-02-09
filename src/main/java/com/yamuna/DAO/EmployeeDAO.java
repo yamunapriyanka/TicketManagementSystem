@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.yamuna.exception.PersistantException;
 import com.yamuna.model.Department;
 import com.yamuna.model.Employee;
-
+import com.yamuna.model.Role;
 import com.yamuna.util.ConnectionUtil;
 
 public class EmployeeDAO {
@@ -47,7 +47,7 @@ public List<Employee> listEmployee() {
 	});}
 
 	public Employee findOne(int id) {
-		String sql = "SELECT ID,DEPARTMENT_ID,ROLE_ID,NAME,EMAIL,ACTIVE FROM EMPLOYEES WHERE ID = ?";
+		String sql = "SELECT ID,DEPARTMENT_ID,ROLE_ID,NAME,EMAIL,ISACTIVE FROM EMPLOYEE WHERE ID = ?";
 		Object[] params = { id };
 		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> convert(rs));
 
@@ -56,7 +56,7 @@ public List<Employee> listEmployee() {
 	public Employee findOne(String emailId,String password) throws PersistantException {
 	
 	try{
-		String sql = "SELECT ID FROM EMPLOYEES WHERE EMAIL_ID = ? AND PASSWORD=? AND ACTIVE=1";
+		String sql = "SELECT ID FROM EMPLOYEE WHERE EMAIL_ID = ? AND PASSWORD=? AND ISACTIVE=1";
 		Object[] params = { emailId,password };
 		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) ->{
 			Employee employee=new Employee();
@@ -87,6 +87,46 @@ Employee convert(final ResultSet rs) throws SQLException {
 		return employee;
 		
 }
+public Employee findEmployeeDepartmentId(String emailId, String password) {
+	// TODO Auto-generated method stubpublic Employee findEmployeeDepartmentId(String emailId,String password) {
+	String sql = "SELECT DEPARTMENT_ID FROM EMPLOYEE WHERE EMAIL_ID = ? AND PASSWORD=? AND ISACTIVE=1";
+	Object[] params = {emailId,password};
+	return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
+		Employee employee=new Employee();
+		Department department=new Department();
+		department.setId(rs.getInt("DEPARTMENT_ID"));
+		employee.setDepartmentId(department);
+		return employee;
+	});
+}
 
+
+public Employee findDepartmentId(int employeeId) {
+	// TODO Auto-generated method stub
+	String sql = "SELECT DEPARTMENT_ID FROM EMPLOYEE WHERE ID = ? AND ISACTIVE=1";
+	Object[] params = {employeeId};
+	return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
+		Employee employee=new Employee();
+		Department department=new Department();
+		department.setId(rs.getInt("DEPARTMENT_ID"));
+		employee.setDepartmentId(department);
+		return employee;
+	
+	});
+
+
+}
+public Employee findEmployeeRoleId(String emailId, String password) {
+	String sql = "SELECT ROLE_ID FROM EMPLOYEE WHERE EMAIL_ID = ? AND PASSWORD=? AND ISACTIVE=1";
+	Object[] params = {emailId,password};
+	return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
+		Employee employee=new Employee();
+		Role role=new Role();
+		role.setId(rs.getInt("ROLE_ID"));
+		employee.setRole_id(role);
+		return employee;
+	});
+
+}
 
 }

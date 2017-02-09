@@ -42,4 +42,35 @@ public class CreateTicketValidator {
 		Validator.isInvalid(password, "PASSWORD");
 		
 	}
+	public void login(String emailId, String password) throws ValidatorException {
+		// TODO Auto-generated method stubpublic void login(String emailId,String password) throws ValidatorException{
+		validator.isInvalid(emailId, "EMAIL_ID");
+		validator.isInvalid(password, "PASSWORD");
+		
+	}
+
+	public void assignEmployee(String emailId, String password, int issueId, int employeeId) throws ValidatorException{
+		
+		validator.isInvalid(emailId, "EMAIL");
+		validator.isInvalid(password, "PASSWORD");
+		validator.isInvalid(issueId, "ISSUE_ID");
+		validator.isInvalid(employeeId, "EMPLOYEE_ID");
+	}
+	
+	public void ticketSolution(String emailId, String password, int issueId, String ticketSolution) throws ValidatorException{
+		
+		validator.isInvalid(emailId, "EMAIL");
+		validator.isInvalid(password, "PASSWORD");
+		validator.isInvalid(issueId, "ISSUE_ID");
+		validator.isInvalid(ticketSolution, "SOLUTION");
+	}
+	public void findEmployeeTickets(String emailId, String password) throws ValidatorException{
+		validator.isInvalid(emailId, "EMAIL");
+		validator.isInvalid(password, "PASSWORD");
+	}
+	public void deleteTickets(String emailId, String password, int issueId) throws ValidatorException{
+		validator.isInvalid(emailId, "EMAIL");
+		validator.isInvalid(password, "PASSWORD");
+		validator.isInvalid(issueId, "ISSUE_ID");
+	}
 }

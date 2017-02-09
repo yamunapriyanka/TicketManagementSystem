@@ -2,6 +2,7 @@ package com.yamuna.DAO;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.yamuna.model.Department;
 import com.yamuna.model.Role;
 import com.yamuna.util.ConnectionUtil;
 
@@ -31,5 +32,15 @@ JdbcTemplate jdbcTemplate= ConnectionUtil.getJdbcTemplate();
 		int rows = jdbcTemplate.update(sql, params);
 		System.out.println("No of rows deleted: " + rows);
 
+	}
+	public Role findRoleId(Role role) {
+		String sql = "SELECT id FROM ROLE WHERE role = ? AND is_active=1";
+		Object[] params = {role.getRole()};
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNo) -> {
+			Role roles=new Role();
+			roles.setId(rs.getInt("id"));
+			return roles;
+		});
+	
 	}
 }

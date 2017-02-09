@@ -6,6 +6,7 @@ package com.yamuna.model;
 	public class Role {
 	private int id;
 	private String role;
+	private boolean is_active;
 		
 	}
 

@@ -9,7 +9,7 @@ public class TestUserInfoDAO {
 	public static void main(String[] args) throws PersistantException {
 UserInfo userInfo=new UserInfo();
 UserInfoDAO userInformationDAO=new UserInfoDAO();
-//userInfo.setEmailId("solai@gmail.com");
+userInfo.setEmailid("yamuna@gmail.com");
 //userInfo.setPassword("solai1234");
 //userInfoDAO.delete(4);
 
@@ -20,7 +20,7 @@ UserInfoDAO userInformationDAO=new UserInfoDAO();
 //			final UserInfo userInformation = (UserInfo) ii.next();
 //          System.out.println(userInformation.getId()+"\t"+userInformation.getName()+"\t"+userInformation.getEmailid()+"\t"+userInformation.getPassword()+"\t"+userInformation.isIsactive());
 //      }
-userInfo.setEmailid("yamuna@gmail.com");
+//userInfo.setEmailid("yamuna@gmail.com");
 //userInfo.setPassword("yamuna123");
 
 System.out.println(userInformationDAO.findUserId(userInfo.getEmailid()));
