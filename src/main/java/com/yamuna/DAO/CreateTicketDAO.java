@@ -3,6 +3,8 @@ package com.yamuna.DAO;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.mail.EmailException;
+
 import com.yamuna.exception.PersistantException;
 import com.yamuna.model.Department;
 import com.yamuna.model.Employee;
@@ -222,7 +224,7 @@ public class CreateTicketDAO {
 			return IssueDAO.findempTickets(employeeId);
 
 	}
-		public void ticketSolution(String emailId, String password, int issueId, String ticketSolution) throws PersistantException {
+		public void ticketSolution(String emailId, String password, int issueId, String ticketSolution) throws PersistantException, EmailException {
 			// TODO Auto-generated method stubpublic void ticketSolution(String emailId, String password, int issueId, String ticketSolution)throws PersistenceException {
 			LoginDAO loginDao = new LoginDAO();
 			try {
@@ -249,12 +251,8 @@ public class CreateTicketDAO {
 					else{
 						System.out.println("You are not assigned to this issue");
 					}
-					
-					try {
-						MailUtil.sendSimpleMail(emailId,"The Solution for your query is as follows:"+ticketSolution+"-"+"Your ticket id is:",issueId);
-					} catch (Exception e) {
-
-					}
+					MailUtil.sendSimpleMail();
+				
 				}
 			} catch (PersistantException e) {
 				throw new PersistantException("Login Failed", e);

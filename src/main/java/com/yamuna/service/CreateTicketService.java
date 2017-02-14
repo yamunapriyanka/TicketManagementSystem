@@ -2,6 +2,8 @@ package com.yamuna.service;
 
 import java.util.List;
 
+import org.apache.commons.mail.EmailException;
+
 import com.yamuna.DAO.CreateTicketDAO;
 import com.yamuna.DAO.LoginDAO;
 import com.yamuna.Validator.CreateTicketValidator;
@@ -105,7 +107,7 @@ public class CreateTicketService {
 	}
 
 	public void ticketSolution(String emailId, String password, int issueId, String ticketSolution)
-			throws ServiceException {
+			throws ServiceException, EmailException {
 
 		try {
 			createTicketValidator.ticketSolution(emailId, password, issueId, ticketSolution);

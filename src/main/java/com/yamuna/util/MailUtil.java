@@ -14,19 +14,19 @@ package com.yamuna.util;
 
 
 	//User mail	
-		public static void sendSimpleMail(String mail,String message,int issueId) throws EmailException{
+		public static void sendSimpleMail() throws EmailException{
 		Email email = new SimpleEmail();
 
 		email.setSmtpPort(587);
 		
-		email.setAuthenticator(new DefaultAuthenticator("ticketmanagement.tms@gmail.com", "ticket123"));
+		email.setAuthenticator(new DefaultAuthenticator("yamunapriyanka424@gmail.com", "chintooo1995"));
 		email.setDebug(true);
 		email.setHostName("smtp.gmail.com");
 		email.setSSLOnConnect(true);
-		email.setFrom("ticketmanagement.tms@gmail.com");
+		email.setFrom("yamunapriyanka424@gmail.com");
 		email.setSubject("Ticket Management System");
-		email.setMsg(message+""+issueId);
-		email.addTo(mail);
+		email.setMsg("hi beauty");
+		email.addTo("yamulads.24@gmail.com");
 		email.setStartTLSEnabled(true);
 		email.send();
 		
