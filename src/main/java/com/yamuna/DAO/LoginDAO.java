@@ -4,9 +4,9 @@ import com.yamuna.exception.PersistantException;
 
 public class LoginDAO {
 
-	UserInfoDAO userDao=new UserInfoDAO();
+	  UserInfoDAO userDao=new UserInfoDAO();
 	EmployeeDAO employeeDao=new EmployeeDAO();
-	public boolean login(String emailId,String password) throws PersistantException  {
+	public   boolean login(String emailId,String password) throws PersistantException  {
 		
 			userDao.findOne(emailId,password).getId();
 							return true;

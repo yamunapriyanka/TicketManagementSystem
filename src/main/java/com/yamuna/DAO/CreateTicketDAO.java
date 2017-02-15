@@ -113,29 +113,27 @@ public class CreateTicketDAO {
 		}
 	}
 	
-	public void findUserDetails(String emailId,String password) throws PersistantException{
+	public List<com.yamuna.model.Issue> findUserDetails(String emailId,String password) throws PersistantException{
 		LoginDAO loginDao=new LoginDAO();
-		if(loginDao.login(emailId, password)){
-			
 		UserInfo userinfo=new UserInfo();
 		UserInfoDAO userinfoDao=new UserInfoDAO();
-			
+		try{
+		if(loginDao.login(emailId, password))
+			{
 		int userId=userinfoDao.findUserId(emailId).getId();
 		userinfo.setId(userId);
 		IssueDAO.findUserDetails(userinfo.getId());
 		
 		List<Issue> list = IssueDAO.findUserDetails(userId);
-		Iterator<Issue> i = list.iterator();
-		while (i.hasNext()) {
-	    Issue Issue = (Issue) i.next();
-			System.out.println(Issue.getId()+ "\t"+Issue.getUSER_ID().getId()+"\t" +Issue.getSUBJECT() + "\t"
-					+ Issue.getDESCRIPTION() + "\t"+ Issue.getSTATUS());
+		
+		return list;
 		}
 		}
-		else
+	catch(PersistantException e)
 		{
-			System.out.println("Incorrect user name or password");
+		throw new PersistantException("incorrent username or password"); 
 		}
+		return null;
 		
 	}
 	

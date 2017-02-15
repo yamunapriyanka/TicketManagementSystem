@@ -1,5 +1,6 @@
 package com.yamuna.service;
 
+
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
@@ -12,11 +13,11 @@ import com.yamuna.exception.ServiceException;
 import com.yamuna.exception.ValidatorException;
 import com.yamuna.model.Issue;
 
+
 public class CreateTicketService {
 
 	CreateTicketValidator createTicketValidator = new CreateTicketValidator();
 	CreateTicketDAO createTicketDao = new CreateTicketDAO();
-	LoginDAO loginDao=new LoginDAO();
 
 	public void registration(String name, String emailId, String password) throws ServiceException {
 
@@ -25,16 +26,6 @@ public class CreateTicketService {
 			createTicketDao.registration(name, emailId, password);
 		} catch (ValidatorException | PersistantException e) {
 			throw new ServiceException("Registration Failed", e);
-		}
-	}
-	
-	public void login(String emailId, String password) throws ServiceException {
-
-		try {
-			createTicketValidator.login(emailId, password);
-			loginDao.login(emailId, password);
-		} catch (ValidatorException | PersistantException e) {
-			throw new ServiceException("Login Failed", e);
 		}
 	}
 
@@ -72,27 +63,17 @@ public class CreateTicketService {
 
 		}
 	}
-	
-	
-	
-//	public List<Issue> findUserDetails(Issue issue) throws ServiceException{
-//		try {
-//			return createTicketDao.findUserDetails(issue);
-//		} catch (PersistantException e) {
-//			throw new ServiceException("Cannot View Ticket", e);
-//		} 
-//	
-//	
-//	}
-	
 
-	public void findUserDetails(String emailId, String password) throws ServiceException {
+	public List<Issue> findUserDetails(String emailId, String password) throws ServiceException {
+
 		try {
 			createTicketValidator.findUserDetails(emailId, password);
-			createTicketDao.findUserDetails(emailId, password);
+			return createTicketDao.findUserDetails(emailId, password);
 		} catch (ValidatorException | PersistantException e) {
 			throw new ServiceException("Cannot View Ticket", e);
+
 		}
+
 	}
 
 	public void assignEmployee(String emailId, String password, int issueId, int employeeId) throws ServiceException {
@@ -118,8 +99,6 @@ public class CreateTicketService {
 		}
 	}
 	
-	
-
 	public void findEmployeeTickets(String emailId, String password) throws ServiceException{
 		
 		try {
@@ -141,6 +120,22 @@ public class CreateTicketService {
 
 		}
 		
+	}
+
+	public List<Issue> findUserDetails(Issue issue) throws ServiceException, PersistantException {
+		return createTicketDao.findUserDetails(issue); 
+	}
+
+
+	public void login(String emailId, String password) throws ServiceException {
+
+		try {
+			LoginDAO loginDAO=new LoginDAO();
+			createTicketValidator.login(emailId, password);
+			loginDAO.login(emailId, password);
+		} catch (ValidatorException | PersistantException e) {
+			throw new ServiceException("Login Failed", e);
+		}
 	}
 
 }

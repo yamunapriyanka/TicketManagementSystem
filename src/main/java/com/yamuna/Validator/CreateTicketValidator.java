@@ -64,7 +64,7 @@ public class CreateTicketValidator {
 		validator.isInvalid(issueId, "ISSUE_ID");
 		validator.isInvalid(ticketSolution, "SOLUTION");
 	}
-	public void findEmployeeTickets(String emailId, String password) throws ValidatorException{
+	public  void findEmployeeTickets(String emailId, String password) throws ValidatorException{
 		validator.isInvalid(emailId, "EMAIL");
 		validator.isInvalid(password, "PASSWORD");
 	}
